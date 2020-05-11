@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/getUsers', function () {
+    return view('welcome');
+});
+
+Route::get('/addUser', 'UserController@add');
+Route::get('/getUser/{id}', 'UserController@get');
+Route::get('/randomUserName/{lenght}', 'UserController@randomUserName');
+Route::get('/getTenLastUsers', 'UserController@getTenLastUsers');
+Route::get('/getTransactions/{id}', 'TransactionController@getTransactionsByUserId');
+
+
+
+
