@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class User extends Model
 {
@@ -18,6 +19,10 @@ class User extends Model
         $this->name = $name;
         $this->email = $email;
         $this->permissions = $permissions;
-        $this->save();
+        try {
+            $this->save();
+        } catch (\Exception $exception) {
+            Log::error('Admin not saved:' . $exception->getMessage());
+        }
     }
 }
