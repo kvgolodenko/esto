@@ -12,4 +12,12 @@ class User extends Model
     {
         return $this->hasMany('App\UserTransaction');
     }
+
+    public function createAdmin(string $name, string $email, int $permissions)
+    {
+        $this->name = $name;
+        $this->email = $email;
+        $this->permissions = $permissions;
+        $this->save();
+    }
 }

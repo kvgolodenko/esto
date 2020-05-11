@@ -30,5 +30,7 @@ class TransactionController extends Controller
             Log::error('Transaction not saved:' . $exception->getMessage());
         }
 
+        return true;
+
     }
 }
