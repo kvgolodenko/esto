@@ -19,6 +19,7 @@ class User extends Model
         $this->name = $name;
         $this->email = $email;
         $this->permissions = $permissions;
+
         try {
             $this->save();
         } catch (\Exception $exception) {
