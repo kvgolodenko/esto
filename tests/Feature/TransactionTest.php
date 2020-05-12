@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\TransactionController;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TransactionTest extends TestCase
@@ -16,9 +14,18 @@ class TransactionTest extends TestCase
      */
     public function testAdd()
     {
-        $transaction = (new TransactionController())->add(1,'debit','100');
+        $transaction = (new TransactionController())->add(24,'credit','100');
 
         if ($transaction) {
+            $this->assertTrue(true);
+        }
+    }
+
+    public function testGetLastUsersAmounts()
+    {
+        $users = (new TransactionController())->getLastUsersAmounts();
+
+        if (is_array($users)) {
             $this->assertTrue(true);
         }
     }

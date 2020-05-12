@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -15,6 +14,7 @@ class UserController extends Controller
         $newUser->name = $username;
         $newUser->email = $email;
         $newUser->permissions = $permissions;
+
         try {
             $newUser->save();
         } catch (\Exception $exception) {
@@ -43,7 +43,17 @@ class UserController extends Controller
 
     public function getTenLastUsers()
     {
-        $users = User::query()->orderBy('created_at','DESC')->limit(10)->get();
-        return $users;
+        $result = [];
+        $users = User::query()
+            ->orderBy('created_at','DESC')
+            ->limit(10)->get(['id']);
+
+        foreach ($users as $user) {
+            $result[] = $user->id;
+        }
+
+        return $result;
     }
+
+
 }

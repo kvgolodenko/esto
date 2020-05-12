@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\UserTransaction;
-use Composer\DependencyResolver\Transaction;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -31,6 +29,18 @@ class TransactionController extends Controller
         }
 
         return true;
+    }
+
+    public function getLastUsersAmounts()
+    {
+        $lastUsers = (new UserController())->getTenLastUsers();
+
+        $users = DB::select('SELECT user_id, SUM(amount) as sum_amount FROM `users_transactions`
+        WHERE ( user_id IN ('.implode(',',$lastUsers).')
+            AND type = "debit")
+        GROUP BY user_id');
+
+        return $users;
 
     }
 }
